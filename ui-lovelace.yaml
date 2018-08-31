@@ -1,0 +1,485 @@
+title: Home Assistant
+
+resources:
+  - url: https://unpkg.com/moment@2.22.2/moment.js
+    type: js
+  - url: /local/calendar-card.js
+    type: module
+    
+views:
+
+  - title: Home
+    id: home
+    cards:
+      - type: vertical-stack
+        cards: 
+          - type: entities
+            title: Entrace
+            show_header_toggle: false            
+            entities:
+              - switch.entrance_lamp
+          - type: horizontal-stack
+            cards:
+              - type: entities
+                title: Living Room
+                show_header_toggle: true
+                entities:
+                  - entity: switch.wemo_switch_fl
+                    name: Professor
+                  - entity: switch.wemo_switch_tl
+                    name: Tiffany
+                  - entity: switch.wemo_switch_sl
+                    name: Shelf
+              - type: entities
+                title: Dining Room
+                show_header_toggle: true
+                entities:
+                  - entity: light.dining_room_lights
+                    name: Dining Room
+                  - entity: switch.piano_lights  
+                    name: Piano Lamps
+                  - entity: switch.boothseat_lamps
+                    name: Boothseat
+          - type: entities
+            title: Kitchen
+            show_header_toggle: false
+            entities:
+              - light.kitchen_lights
+          - type: entities
+            title: Theatre
+            show_header_toggle: false
+            entities:
+              - switch.theatre_lamp
+              - switch.tetris_lamps
+              - scene.fire_up_the_theatre
+              - scene.shutdown_the_theatre  
+      
+      - type: vertical-stack
+        cards:
+#          - type: picture-glance
+#            image: http://merrilldavid.com/wp-content/uploads/2018/02/living-room-tv-in-living-room-fresh-perfect-wall-mounted-units-for-living-room-tv-stand-images.jpg
+#            title: Television
+#            entities:
+#              - switch.tv
+#              - script.friends
+#              - script.jokers
+#              - script.lliott
+          - type: entities
+            title: TV
+            show_header_toggle: false
+            entities:
+              - switch.tv
+              - cover.tv_volume            
+          - type: entities
+            title: Fireplace
+            show_header_toggle: false
+            entities: 
+              - switch.fireplace  
+          - type: entities
+            title: Bedroom
+            show_header_toggle: true
+            entities:
+              - entity: switch.bedroom_lamps
+                name: Berry Lights
+              - entity: switch.bedroom_oil_burner
+                name: Salt Lamp              
+          - type: entities
+            title: Bedroom Lights
+            show_header_toggle: false
+            entities:
+              - light.bedroom
+          - type: entities
+            show_header_toggle: false
+            title: Elliott's Room
+            entities:
+              - light.elliotts_room 
+              
+      - type: vertical-stack
+        cards:
+          - type: weather-forecast
+            entity: weather.dark_sky 
+          - type: entities
+            title: Vacuum
+            entities: 
+              - entity: vacuum.xiaomi_vacuum_cleaner
+                name: Vacuum Cleaner
+                icon: mdi:robot-vacuum
+              - type: divider
+              - entity: sensor.speed_vacuum
+                name: Current Speed Setting
+              - entity: sensor.battery_vacuum
+                name: Battery Level
+              - entity: sensor.time_vacuum
+                name: Total Cleaning Time
+              - type: divider
+              - entity: input_select.vacuum_speed
+              - entity: script.set_vacuum_speed
+                name: Set Vacuum Speed
+                icon: mdi:robot-vacuum
+#              - type: divider
+#              - entity: input_select.vacuum_room
+#              - entity: script.vacuum_room
+#                icon: mdi:robot-vacuum
+            
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Sensors
+            entities:
+              - entity: sensor.lounge_room_motion_sensor
+                secondary_info: last-changed
+                name: Lounge Room Motion
+              - entity: automation.motion_in_lounge_room
+                name: Turn the Light on for motion
+              - entity: sensor.aeotec_zw100_multisensor_6_temperature
+                secondary_info: last-changed
+                name: Lounge Room Temperature
+              - entity: sensor.aeotec_zw100_multisensor_6_luminance
+                secondary_info: last-changed
+                name: Lounge Room Luminance
+              - type: divider
+              - entity: sensor.speedtest_download
+              - entity: sensor.speedtest_upload
+              - type: divider
+              - entity: device_tracker.bill_dunhams_iphone
+              - entity: device_tracker.newski_samsung
+          - type: iframe
+            url: https://embed.windy.com/embed2.html
+              
+  - title: Alarm
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Morning Routine
+            show_header_toggle: false
+            entities:
+              - sensor.alarm_time
+              - input_number.alarmhour
+              - input_number.alarmminutes
+              - input_boolean.alarmstatus
+              - input_boolean.alarmweekday
+          - type: entities
+            title: Alarm Actions
+            show_header_toggle: false
+            entities:
+              - input_boolean.elliott_tv
+              - input_boolean.bedroom_lights
+              - input_boolean.bedrom_music
+      - type: "custom:calendar-card"
+        entities: 
+          - calendar.contacts
+          - calendar.shared_calendar
+          - calendar.episode_schedule
+          - calendar.recording
+          - calendar.holidays_in_australia
+  
+  - title: Music
+    cards: 
+#      - type: vertical-stack
+#        cards:
+#          - type: entities
+#            title: Choose Source
+#            show_header_toggle: false
+#            entities:
+#              - entity: script.spotify_lounge
+#              - entity: script.spotify_bedroom
+#              - entity: script.spotify_theatre 
+#                name: Patio
+#          - type: entities
+#            title: Playlists
+#            show_header_toggle: false
+#            entities:
+#              - script.spotify_bagel
+#              - script.spotify_bowls_club
+#              - script.spotify_newski
+#              - script.spotify_discover_billy
+#              - script.spotify_rock
+#              - script.spotify_classical
+#              - script.spotify_hamilton
+#              - script.spotify_elliott
+#              - script.spotify_christmas
+#              - script.spotify_riverdance
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Spotify
+            show_header_toggle: false
+            entities:
+              - input_select.spotify_playlist
+              - input_select.spotify_source
+              - script.spotify_music
+              - input_number.spotify_volume
+              - script.spotify_shuffle
+          - type: entities
+            title: Announcements
+            entities:
+              - input_text.alexa_tts
+              - input_select.alexa
+      - type: media-control
+        entity: media_player.spotify  
+
+  - title: Bedroom
+    cards:
+      - type: picture-entity
+        image: https://img.furnwarehouse.com/images/858766/01-emily-merlot-6-piece-queen-bedroom-set.jpg
+        entity: group.bedroom_home
+        tap_action: toggle
+      - type: entities
+        title: Bedroom TV
+        show_header_toggle: false
+        entities:
+          - switch.bedroom_tv
+          - cover.bedroom_tv_volume
+      - type: media-control
+        entity: media_player.bedroom  
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Bedroom
+            show_header_toggle: true
+            entities:
+              - entity: switch.bedroom_lamps
+                name: Berry Lights
+              - entity: switch.bedroom_oil_burner
+                name: Salt Lamp
+          - type: entities
+            title: Bedroom Lights
+            entities:
+              - light.bedroom       
+          
+  - title: Lounge Room
+    cards:
+      - type: vertical-stack
+        cards: 
+          - type: entities
+            title: Entrace
+            show_header_toggle: false
+            entities:
+              - switch.entrance_lamp
+          - type: horizontal-stack
+            cards:
+              - type: entities
+                title: Living Room
+                show_header_toggle: true
+                entities:
+                  - switch.wemo_switch_fl
+                  - switch.wemo_switch_tl
+                  - switch.wemo_switch_sl
+              - type: entities
+                title: Dining Room
+                show_header_toggle: true
+                entities:
+                  - light.dining_room_lights
+                  - switch.piano_lights                
+                  - switch.boothseat_lamps
+          - type: media-control
+            entity: media_player.loungeroom_tv
+          - type: media-control
+            entity: media_player.lounge_room_2
+              
+      - type: vertical-stack
+        cards:
+          - type: picture-glance
+            image: http://merrilldavid.com/wp-content/uploads/2018/02/living-room-tv-in-living-room-fresh-perfect-wall-mounted-units-for-living-room-tv-stand-images.jpg
+            title: Television
+            entities:
+              - switch.tv
+              - script.friends
+              - script.jokers
+              - script.lliott
+          - type: entities
+            title: TV Volume
+            show_header_toggle: false
+            entities:
+              - cover.tv_volume            
+          - type: picture-entity
+            image: http://affordableheating.com/wp-content/uploads/b2b/stock/v2/bigstock/fireplace-in-winter-16867610.jpg
+            entity: switch.fireplace
+            tap_action: toggle
+            
+  - title: Theatre
+    cards:
+      - type: picture-entity
+        image: https://img.maximummedia.ie/joe_ie/eyJkYXRhIjoie1widXJsXCI6XCJodHRwOlxcXC9cXFwvbWVkaWEtam9lLm1heGltdW1tZWRpYS5pZS5zMy5hbWF6b25hd3MuY29tXFxcL3dwLWNvbnRlbnRcXFwvdXBsb2Fkc1xcXC8yMDE1XFxcLzEwXFxcLzI2MTEyOTA5XFxcL01hemRhLUNpbmVtYS5qcGdcIixcIndpZHRoXCI6NzY3LFwiaGVpZ2h0XCI6NDMxLFwiZGVmYXVsdFwiOlwiaHR0cHM6XFxcL1xcXC93d3cuam9lLmllXFxcL2Fzc2V0c1xcXC9pbWFnZXNcXFwvam9lXFxcL25vLWltYWdlLnBuZz92PTVcIn0iLCJoYXNoIjoiMTgzMjRiYjIwZDdhNzU4MjQyNzNmOGJhYmI5NTEyYmZmZGY3NDQ5YSJ9/mazda-cinema.jpg
+        entity: scene.fire_up_the_theatre
+        tap_action: toggle
+      - type: entities
+        title: Theatre Devices
+        show_header_toggle: false
+        entities:
+          - scene.fire_up_the_theatre
+          - scene.shutdown_the_theatre
+          - switch.theatre_lamp
+          - switch.tetris_lamps
+          - cover.theatre_screen
+          - switch.projector     
+      - type: entities
+        title: Surround Sound
+        show_header_toggle: false
+        entities:
+          - switch.theatre_sound
+          - cover.theatre_volume   
+          
+  - title: Dining Room
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: picture-entity
+            image: http://cdn.shopify.com/s/files/1/0948/4690/products/400777655_b2c317b4-2cca-49ef-9902-330574a72e57_grande.jpg?v=1457011995
+            entity: light.dining_room_lights
+            tap_action: toggle
+          - type: entities
+            title: Lights
+            show_header_toggle: true
+            entities:
+              - light.dining_room_lights
+              - switch.piano_lights                
+              - switch.boothseat_lamps  
+      - type: entities
+        title: Colours
+        show_header_toggle: false
+        entities:
+          - scene.dining_room_lights_warm_white
+          - scene.dining_room_lights_red
+          - scene.dining_room_lights_blue
+          - scene.dining_room_lights_orange
+          - scene.dining_room_lights_green
+          - scene.dining_room_lights_purple
+          - script.party_mode
+          
+  - title: Kitchen
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: picture-entity
+            image: https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/index-rustic-kitchen-1517254441.jpg
+            entity: light.kitchen_lights
+            tap_action: toggle
+          - type: entities
+            title: Lights
+            show_header_toggle: false
+            entities:
+              - light.kitchen_lights 
+      - type: entities
+        title: Colours
+        show_header_toggle: false
+        entities:
+          - scene.kitchen_lights_warm_white
+          - scene.kitchen_lights_red
+          - scene.kitchen_lights_blue
+          - scene.kitchen_lights_orange
+          - scene.kitchen_lights_green
+          - scene.kitchen_lights_purple
+          - script.party_mode    
+  
+  - title: Floorplan
+    panel: true
+    cards:
+      - type: picture-elements
+        image: /local/floorplan/Untitled.png
+        elements:
+        - type: image
+          tap_action: toggle
+          entity: light.kitchen
+          image: /local/floorplan/kitchen.png
+          state_filter:
+            "off": opacity(65%)
+            "on": opacity(1%)
+          style:
+            top: 64.8%
+            left: 57%
+            width: 16.3%
+        - type: image
+          tap_action: toggle
+          entity: switch.entrance_lamp
+          image: /local/floorplan/hallway.png
+          state_filter:
+            "off": opacity(65%)
+            "on": opacity(1%)
+          style:
+            top: 53%
+            left: 79%
+            width: 28%
+        - type: image
+          tap_action: toggle
+          entity: group.dining_room_lamps
+          image: /local/floorplan/dining room.png
+          state_filter:
+            "off": opacity(65%)
+            "on": opacity(1%)
+          style:
+            top: 31.4%
+            left: 64%
+            width: 16.5%
+        - type: image
+          tap_action: toggle
+          entity: switch.theatre_lamp
+          image: /local/floorplan/theatre.png
+          state_filter:
+            "off": opacity(55%)
+            "on": opacity(1%)
+          style:
+            top: 79%
+            left: 76.5%
+            width: 23%
+        - type: image
+          tap_action: toggle
+          entity: group.bedroom_lamps
+          image: /local/floorplan/bedroom.png
+          state_filter:
+            "off": opacity(65%)
+            "on": opacity(1%)
+          style:
+            top: 23.5%
+            left: 86%
+            width: 28%
+        - type: image
+          tap_action: toggle
+          entity: group.lounge_room_lamps
+          image: /local/floorplan/lounge room.png
+          state_filter:
+            "off": opacity(65%)
+            "on": opacity(1%)
+          style:
+            top: 61.5%
+            left: 35.6%
+            width: 27%
+        - type: image
+          tap_action: toggle
+          entity: light.elliotts_room
+          image: /local/floorplan/Elliotts room.png
+          state_filter:
+            "off": opacity(65%)
+            "on": opacity(1%)
+          style:
+            top: 20.5%
+            left: 47%
+            width: 18%           
+        - type: image
+          tap_action: toggle
+          entity: light.elliotts_room
+          image: /local/floorplan/hallway bathroom laundy.png
+          state_filter:
+            "off": opacity(65%)
+            "on": opacity(1%)
+          style:
+            top: 21.2%
+            left: 28%
+            width: 20%  
+        - type: image
+          tap_action: toggle
+          entity: light.elliotts_room
+          image: /local/floorplan/brienns room.png
+          state_filter:
+            "off": opacity(65%)
+            "on": opacity(1%)
+          style:
+            top: 21.2%
+            left: 9.5%
+            width: 17%             
+            
+
+#      - type: iframe
+#        url: https://calendar.google.com/calendar/embed?showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&mode=AGENDA&height=1000&src=dunham.billy%40gmail.com&ctz=Australia%2FSydney
+          

@@ -1,0 +1,20 @@
+  - platform: spotify
+    client_id: XXXXX
+    client_secret: XXXXX
+    
+  - platform: kodi
+    host: XXXXX
+    port: XXXXX
+    name: Loungeroom TV
+    username: XXXXX
+    password: XXXXX
+  
+#  - platform: plex
+  
+  - platform: alexa
+    email: XXXXX
+    password: XXXXX
+    url: XXXXX
+    
+
+

@@ -1,0 +1,875 @@
+  spotify_lounge:
+    sequence:
+      - service: media_player.volume_set
+        data: {"entity_id":"media_player.spotify","volume_level":"0.01"}
+      - service: media_player.select_source
+        data: {"entity_id": "media_player.spotify", "source": "Lounge Room"}
+      - service: media_player.media_play_pause
+        data: {"entity_id": "media_player.spotify"}
+      - service: media_player.volume_set
+        data: {"entity_id": "media_player.spotify", "volume_level": "0.3"}
+        
+  spotify_bedroom:
+    sequence:
+      - service: media_player.volume_set
+        data: {"entity_id":"media_player.spotify","volume_level":"0.01"}
+      - service: media_player.select_source
+        data: {"entity_id": "media_player.spotify", "source": "Bedroom"}
+      - service: media_player.media_play_pause
+        data: {"entity_id": "media_player.spotify"}
+      - service: media_player.volume_set
+        data: {"entity_id": "media_player.spotify", "volume_level": "0.3"}    
+        
+  spotify_theatre:
+    sequence:
+      - service: media_player.volume_set
+        data: {"entity_id":"media_player.spotify","volume_level":"0.01"}
+      - service: media_player.select_source
+        data: {"entity_id": "media_player.spotify", "source": "Patio"}
+      - service: media_player.media_play_pause
+        data: {"entity_id": "media_player.spotify"}
+      - service: media_player.volume_set
+        data: {"entity_id": "media_player.spotify", "volume_level": "0.3"}
+        
+  bedroom_music_morning:
+    sequence:
+      - service: media_player.volume_set
+        data: {"entity_id":"media_player.spotify","volume_level":"0.01"}
+      - service: media_player.select_source
+        data: {"entity_id": "media_player.spotify", "source": "Bedroom"}
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.spotify
+          media_content_type: playlist
+          media_content_id: spotify:user:XXXXX
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: true
+      - service: script.turn_on
+        data:
+          entity_id: script.fade_up_volume
+
+  fade_up_volume:
+    sequence:
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.05
+      - delay:
+          seconds: '15'
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.07
+      - delay:
+          seconds: '15'
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.1
+      - delay:
+          seconds: '15'
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.12
+      - delay:
+          seconds: '15'
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.15
+      - delay:
+          seconds: '15'
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.17
+      - delay:
+          seconds: '15'
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.2
+      - delay:
+          seconds: '15'
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.22
+      - delay:
+          seconds: '15'
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.25
+      - delay:
+          seconds: '15'
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.27
+      - delay:
+          seconds: '15'
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.3
+      - delay:
+          seconds: '15'
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.32
+      - delay:
+          seconds: '15'
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.35
+      - delay:
+          seconds: '15'
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.37
+      - delay:
+          seconds: '15'
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.spotify
+          volume_level: 0.4
+          
+  friends:
+    sequence:
+      - service: shell_command.play_friends
+
+  lliott:
+    sequence:
+      - service: shell_command.play_lliott
+
+  jokers:
+    sequence:
+      - service: shell_command.play_jokers
+  
+  disney_junior_two:
+    sequence:
+      - service: shell_command.disney_junior_two
+
+  nick_junior:
+    sequence:
+      - service: shell_command.nick_junior
+
+  nick_junior_too:
+    sequence:
+      - service: shell_command.nick_junior_too
+
+  disney_junior:
+    sequence:
+      - service: shell_command.disney_junior
+      
+  sexy_time:
+    sequence:
+      - service: ifttt.trigger
+        data: {"event":"TestHA_Trigger"}
+        
+  motion_light:
+    sequence:
+      - service: light.turn_on
+        data:
+          entity_id: light.kitchen
+          brightness: 20
+      - delay:
+          minutes: 10
+      - service: light.turn_off
+        data:
+          entity_id: light.kitchen
+  
+  party_mode:
+    sequence:
+      - service: light.turn_on
+        data:
+          entity_id: group.all_lights
+          rgb_color: [102, 0, 153]
+          brightness: 255
+      - delay:
+          milliseconds: 300
+      - service: light.turn_on
+        data:
+          entity_id: group.all_lights
+          color_name: green
+          brightness: 255
+      - delay:
+          milliseconds: 300 
+      - service: light.turn_on
+        data:
+          entity_id: group.all_lights
+          color_name: red
+          brightness: 255
+      - delay:
+          milliseconds: 300
+      - service: light.turn_on
+        data:
+          entity_id: group.all_lights
+          color_name: blue
+          brightness: 255
+      - delay:
+          milliseconds: 300
+      - service: light.turn_on
+        data:
+          entity_id: group.all_lights
+          rgb_color: [255, 104, 31]
+          brightness: 255
+      - delay:
+          milliseconds: 300
+      - service: script.turn_on
+        data:
+          entity_id: script.repeat
+ 
+  tv_volume_start:
+    sequence:
+      - delay:
+          seconds: 5
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.close_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.open_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.open_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.open_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.open_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.open_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.open_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.open_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.open_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.open_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.open_cover
+        data:
+          entity_id: cover.tv_volume
+
+  tv_volume_up:
+    sequence:
+      - service: cover.open_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.open_cover
+        data:
+          entity_id: cover.tv_volume          
+      - service: cover.open_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.open_cover
+        data:
+          entity_id: cover.tv_volume
+      - service: cover.open_cover
+        data:
+          entity_id: cover.tv_volume
+          
+  stoke_it:
+    sequence:
+      - service: cover.open_cover
+        data:
+          entity_id: cover.stoke_the_fire
+      - service: cover.open_cover
+        data:
+          entity_id: cover.stoke_the_fire
+          
+  repeat:
+    sequence:
+      - service: script.turn_on
+        data:
+          entity_id: script.party_mode
+          
+  projector:
+    sequence:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.projector
+      - delay:
+          seconds: 1
+      - service: switch.turn_off
+        data:
+          entity_id: switch.projector
+      - delay:
+          seconds: 1
+      - service: switch.turn_off
+        data:
+          entity_id: switch.projector
+
+  fire_up_the_theatre:
+    sequence:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.projector
+      - service: switch.turn_on
+        data:
+          entity_id: switch.theatre_sound
+      - service: cover.close_cover
+        data:
+          entity_id: cover.theatre_screen
+      - delay:
+          seconds: 33
+      - service: cover.stop_cover
+        data:
+          entity_id: cover.theatre_screen
+
+  shutdown_the_theatre:
+    sequence:
+      - service: cover.open_cover
+        data:
+          entity_id: cover.theatre_screen
+      - service: switch.turn_off
+        data:
+          entity_id: switch.projector
+      - service: switch.turn_off
+        data:
+          entity_id: switch.theatre_sound
+
+  spotify_indie:
+    sequence:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.spotify
+          media_content_type: playlist
+          media_content_id: spotify:user:XXXXX
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: true
+      
+  spotify_elliott:
+    sequence:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.spotify
+          media_content_type: playlist
+          media_content_id: spotify:user:XXXXX
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: true
+          
+  spotify_hamilton:
+    sequence:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.spotify
+          media_content_type: playlist
+          media_content_id: spotify:user:XXXXX
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: true
+          
+  spotify_bowls_club:
+    sequence:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.spotify
+          media_content_type: playlist
+          media_content_id: spotify:user:XXXXX
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: true
+          
+  spotify_discover_billy:
+    sequence:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.spotify
+          media_content_type: playlist
+          media_content_id: spotify:user:XXXXX
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: true
+          
+  spotify_newski:
+    sequence:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.spotify
+          media_content_type: playlist
+          media_content_id: spotify:user:XXXXX 
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: true
+          
+  spotify_rock:
+    sequence:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.spotify
+          media_content_type: playlist
+          media_content_id: spotify:user:XXXXX
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: true
+          
+  spotify_christmas:
+    sequence:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.spotify
+          media_content_type: playlist
+          media_content_id: spotify:user:XXXXX
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: true
+          
+  spotify_classical:
+    sequence:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.spotify
+          media_content_type: playlist
+          media_content_id: spotify:user:XXXXX
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: true
+          
+  spotify_riverdance:
+    sequence:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.spotify
+          media_content_type: playlist
+          media_content_id: spotify:user:XXXXX
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: true
+          
+  spotify_bagel:
+    sequence:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.spotify
+          media_content_type: playlist
+          media_content_id: spotify:user:XXXXX
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: true
+          
+  bedtime:
+    sequence:
+      - service: homeassistant.turn_off
+        entity_id: group.bedroom_lamps
+      - service: script.turn_on
+        entity_id: script.spotify_bedroom
+      - delay:
+          seconds: 1
+      - service: media_player.volume_set
+        entity_id: media_player.spotify
+        data:
+          volume_level: 0.7
+      - service: script.turn_on
+        entity_id: script.spotify_classical
+      - service: media_player.shuffle_set
+        data:
+          entity_id: media_player.spotify
+          shuffle: true
+      - delay:
+          minutes: 30
+      - service: media_player.media_pause
+        entity_id: media_player.spotify
+      - delay:
+          seconds: 20  
+          
+  elliott_morning:
+    sequence:
+      - service: homeassistant.turn_on
+        entity_id: group.lounge_room_lamps
+      - service: switch.turn_on
+        entity_id: switch.tv
+      - service: script.turn_on
+        entity_id: script.tv_volume_start
+      - delay:
+          seconds: 20
+      - service: script.turn_on
+        entity_id: script.lliott
+        
+  vacuum_quiet:
+    sequence:
+      - service: vacuum.set_fan_speed
+        data:
+          entity_id: vacuum.xiaomi_vacuum_cleaner
+          fan_speed: Quiet
+
+  vacuum_balanced:
+    sequence:
+      - service: vacuum.set_fan_speed
+        data:
+          entity_id: vacuum.xiaomi_vacuum_cleaner
+          fan_speed: Balanced
+
+  vacuum_turbo:
+    sequence:
+      - service: vacuum.set_fan_speed
+        data:
+          entity_id: vacuum.xiaomi_vacuum_cleaner
+          fan_speed: Turbo
+
+  vacuum_max:
+    sequence:
+      - service: vacuum.set_fan_speed
+        data:
+          entity_id: vacuum.xiaomi_vacuum_cleaner
+          fan_speed: Max
+
+  set_vacuum_speed:
+    sequence:
+      - service: script.turn_on
+        data_template:
+          entity_id: >
+            {%- if is_state("input_select.vacuum_speed", "Quiet") -%}
+              script.vacuum_quiet
+            {%- elif is_state("input_select.vacuum_speed", "Balanced") -%}
+              script.vacuum_balanced
+            {%- elif is_state("input_select.vacuum_speed", "Turbo") -%}
+              script.vacuum_turbo
+            {%- elif is_state("input_select.vacuum_speed", "Max") -%}
+              script.vacuum_max
+            {%- endif -%}      
+
+  vacuum_house:
+        alias: "Vacuum House"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[19059,14948,29659,37448,1]]
+
+  vacuum_entrance:
+        alias: "Vacuum the Entrance"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[21003,15967,23253,24217,1]]
+
+  vacuum_dining:
+        alias: "Vacuum the Dining Room"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[22967,21311,26517,25911,1]]
+
+  vacuum_bedroom:
+        alias: "Vacuum the Bedroom"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[23109,15130,28259,21330,1]]
+
+  vacuum_kitchen:
+        alias: "Vacuum the Kitchen"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[18923,23657,23623,28857,1]]
+
+  vacuum_lounge:
+        alias: "Vacuum the Lounge"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[19037,27190,23887,33090,1]]
+
+  vacuum_baby:
+        alias: "Vacuum the Baby's Room"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[23582,33397,28132,37447,1]]
+
+  vacuum_hallway:
+        alias: "Vacuum the Hallway, Laundry, and Bedroom"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[23876,29083,28576,33933,1]]
+
+  vacuum_elliott:
+        alias: "Vacuum Elliott's Room"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[24047,25893,28147,29093,1]]
+
+  vacuum_room:
+      alias: "Start cleaning"
+      sequence:
+        - service: script.turn_on
+          data_template:
+            entity_id: >
+              {% if is_state("input_select.vacuum_room", "Entrance") %}
+                script.vacuum_entrance
+              {% elif is_state("input_select.vacuum_room", "Bedroom") %}
+                script.vacuum_bedroom
+              {% elif is_state("input_select.vacuum_room", "Dining Room") %}
+                script.vacuum_dining
+              {% elif is_state("input_select.vacuum_room", "Kitchen") %}
+                script.vacuum_kitchen
+              {% elif is_state("input_select.vacuum_room", "Lounge Room") %}
+                script.vacuum_lounge
+              {% elif is_state("input_select.vacuum_room", "Baby's Room") %}
+                script.vacuum_baby
+              {% elif is_state("input_select.vacuum_room", "Hallway, Laundry, and Bathroom") %}
+                script.vacuum_hallway
+              {% elif is_state("input_select.vacuum_room", "Elliott's Room") %}
+                script.vacuum_elliott
+              {% endif %}
+
+  vacuum_go_home:
+        alias: Return to Dock
+        sequence:
+          - service: vacuum.return_to_base
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+  
+  morning_text:
+        alias: Morning Text
+        sequence:
+          - service: notify.notify
+            data_template:
+              message: "Good morning Billy. {%if is_state('calendar.contacts', 'on') -%} Don't forget that it's {{ states.calendar.contacts.attributes.message }} today, so you should send them a message!{%- endif %}{%if is_state('calendar.holidays_in_australia', 'on') -%} It is {{ states.calendar.holidays_in_australia.attributes.message }} which means no work today!{%- endif %}{%if is_state('sensor.date', '2019-05-12') -%}Happy Birthday!{% elif is_state('sensor.date', '2019-04-01') -%}Happy birthday Newski!{% elif is_state('sensor.date', '2019-07-01') -%}Happy birthday Elliott!{%- endif %} The temperature is currently {{ states('sensor.dark_sky_temperature') }} degrees and today you can expect {{ states('sensor.dark_sky_summary') }} weather. {%if is_state('calendar.shared_calendar', 'on') -%} Today on your calendar, you have {{ states.calendar.shared_calendar.attributes.message }}. {%- endif %} It's {{ states('sensor.weekday') }}{% if is_state('sensor.weekday', 'Wednesday') -%}, which means you need to remember to put out the bins. Don't forget! Also take your medication before you leave for work. It should only take you around {{ states('sensor.driving') }} minutes to get to work in current traffic.{% elif is_state('sensor.weekday', 'Sunday') -%}, but you still need to take your medication!{% elif is_state('sensor.weekday', 'Saturday') -%}, but you still need to take your medication! {%elif is_state('calendar.holidays_in_australia', 'on') -%} and a public holiday, but you still need to take your medication!{%- else -%}. You should remember to take your medication . It should only take you around {{ states('sensor.driving') }} minutes to get to work in current traffic.{%- endif %}"
+          - service: notify.slack
+            data_template:
+              message: "Good morning Billy. {%if is_state('calendar.contacts', 'on') -%} Don't forget that it's {{ states.calendar.contacts.attributes.message }} today, so you should send them a message!{%- endif %}{%if is_state('calendar.holidays_in_australia', 'on') -%} It is {{ states.calendar.holidays_in_australia.attributes.message }} which means no work today!{%- endif %}{%if is_state('sensor.date', '2019-05-12') -%}Happy Birthday!{% elif is_state('sensor.date', '2019-04-01') -%}Happy birthday Newski!{% elif is_state('sensor.date', '2019-07-01') -%}Happy birthday Elliott!{%- endif %} The temperature is currently {{ states('sensor.dark_sky_temperature') }} degrees and today you can expect {{ states('sensor.dark_sky_summary') }} weather. {%if is_state('calendar.shared_calendar', 'on') -%} Today on your calendar, you have {{ states.calendar.shared_calendar.attributes.message }}. {%- endif %} It's {{ states('sensor.weekday') }}{% if is_state('sensor.weekday', 'Wednesday') -%}, which means you need to remember to put out the bins. Don't forget! Also take your medication before you leave for work. It should only take you around {{ states('sensor.driving') }} minutes to get to work in current traffic.{% elif is_state('sensor.weekday', 'Sunday') -%}, but you still need to take your medication!{% elif is_state('sensor.weekday', 'Saturday') -%}, but you still need to take your medication! {%elif is_state('calendar.holidays_in_australia', 'on') -%} and a public holiday, but you still need to take your medication!{%- else -%}. You should remember to take your medication . It should only take you around {{ states('sensor.driving') }} minutes to get to work in current traffic.{%- endif %}"
+
+  spotify_shuffle:
+        alias: Shuffle Spotify
+        sequence:
+          - service: media_player.shuffle_set
+            data:
+              entity_id: media_player.spotify
+              shuffle: true
+          
+  spotify_music:
+        alias: Play selected spotify playlist
+        sequence:
+          - service: media_player.volume_set
+            data:
+              entity_id: media_player.spotify
+              volume_level: '0.4'
+          - service: media_player.select_source
+            data_template: 
+              entity_id: media_player.spotify
+              source: >
+               {% if is_state("input_select.spotify_source", "Lounge Room") %} Lounge Room
+               {% elif is_state("input_select.spotify_source", "Bedroom") %} Bedroom
+               {% elif is_state("input_select.spotify_source", "Patio") %} Patio
+               {% endif %}
+          - service: media_player.play_media
+            data_template:
+              entity_id: media_player.spotify
+              media_content_type: playlist
+              media_content_id: >
+               {% if is_state("input_select.spotify_playlist", "Bagel") %} spotify:user:XXXXX
+               {% elif is_state("input_select.spotify_playlist", "Riverdance") %} spotify:user:XXXXX
+               {% elif is_state("input_select.spotify_playlist", "Classical") %} spotify:user:XXXXX
+               {% elif is_state("input_select.spotify_playlist", "Christmas") %} spotify:user:XXXXX
+               {% elif is_state("input_select.spotify_playlist", "Rock") %} spotify:user:XXXXX
+               {% elif is_state("input_select.spotify_playlist", "Newski") %} spotify:user:XXXXX
+               {% elif is_state("input_select.spotify_playlist", "Discover Billy") %} spotify:user:XXXXX
+               {% elif is_state("input_select.spotify_playlist", "Bowls Club 2028") %} spotify:user:XXXXX
+               {% elif is_state("input_select.spotify_playlist", "Hamilton") %} spotify:user:XXXXX
+               {% elif is_state("input_select.spotify_playlist", "Elliott") %} spotify:user:XXXXX
+               {% elif is_state("input_select.spotify_playlist", "Indie") %} spotify:user:XXXXX
+               {% endif %}   
+               
+  morning_alexa:
+        alias: Morning Message Alexa
+        sequence:
+          - service: media_player.alexa_tts
+            data_template:
+              entity_id: media_player.lounge_room_2
+              message: "Good morning Billy. {%if is_state('calendar.contacts', 'on') -%} Don't forget that it's {{ states.calendar.contacts.attributes.message }} today, so you should send them a message!{%- endif %}{%if is_state('calendar.holidays_in_australia', 'on') -%} It is {{ states.calendar.holidays_in_australia.attributes.message }} which means no work today!{%- endif %}{%if is_state('sensor.date', '2019-05-12') -%}Happy Birthday!{% elif is_state('sensor.date', '2019-04-01') -%}Happy birthday Newski!{% elif is_state('sensor.date', '2019-07-01') -%}Happy birthday Elliott!{%- endif %} The temperature is currently {{ states('sensor.dark_sky_temperature') }} degrees and today you can expect {{ states('sensor.dark_sky_summary') }} weather. {%if is_state('calendar.shared_calendar', 'on') -%} Today on your calendar, you have {{ states.calendar.shared_calendar.attributes.message }}. {%- endif %} It's {{ states('sensor.weekday') }}{% if is_state('sensor.weekday', 'Wednesday') -%}, which means you need to remember to put out the bins. Don't forget! Also take your medication before you leave for work. It should only take you around {{ states('sensor.driving') }} minutes to get to work in current traffic.{% elif is_state('sensor.weekday', 'Sunday') -%}, but you still need to take your medication!{% elif is_state('sensor.weekday', 'Saturday') -%}, but you still need to take your medication! {%elif is_state('calendar.holidays_in_australia', 'on') -%} and a public holiday, but you still need to take your medication!{%- else -%}. You should remember to take your medication . It should only take you around {{ states('sensor.driving') }} minutes to get to work in current traffic.{%- endif %}"

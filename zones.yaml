@@ -1,0 +1,17 @@
+  - name: Home
+    latitude: XXXXX
+    longitude: XXXXX
+    radius: 200
+    icon: mdi:home
+    
+  - name: XXXXX
+    latitude: XXXXX
+    longitude: XXXXX
+    radius: 200
+    icon: mdi:briefcase
+
+  - name: XXXXX
+    latitude: XXXXX
+    longitude: XXXXX
+    radius: 300
+    icon: mdi:city

@@ -1,0 +1,14 @@
+  - platform: smtp
+    name: gmail
+    server: smtp.gmail.com
+    port: 587
+    starttls: 1
+    sender: XXXXX
+    username: XXXXX
+    password: XXXXX
+    recipient: XXXXX
+    
+  - name: Slack
+    platform: slack
+    api_key: XXXXX
+    default_channel: '#home'    

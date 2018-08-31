@@ -1,0 +1,136 @@
+- alias: Wake Me Up TV
+  trigger:
+    platform: template
+    value_template: '{{ states.sensor.time.state == states.sensor.alarm_time.state
+      }}'
+  condition:
+    condition: or
+    conditions:
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.alarmstatus
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.alarmweekday
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.elliott_tv
+        state: 'on'
+      - condition: time
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.alarmstatus
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.alarmweekday
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.elliott_tv
+        state: 'on'
+  action:
+    service: script.turn_on
+    entity_id: script.elliott_morning
+    
+- alias: Wake Me Up Bedroom Music
+  trigger:
+    platform: template
+    value_template: '{{ states.sensor.time.state == states.sensor.alarm_time.state
+      }}'
+  condition:
+    condition: or
+    conditions:
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.alarmstatus
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.alarmweekday
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.bedrom_music
+        state: 'on'
+      - condition: time
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.alarmstatus
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.alarmweekday
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.bedrom_music
+        state: 'on'
+  action:
+  - service: script.turn_on
+    entity_id: script.bedroom_music_morning
+
+- alias: 'Set theme at startup'
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    service: frontend.set_theme
+    data:
+      name: PmxMononightOrange
+- alias: Alexa TTS
+  trigger:
+    platform: state
+    entity_id: input_select.alexa
+  action:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: >
+          {% if is_state('input_select.alexa', 'Loungeroom') %}
+            media_player.lounge_room_2
+          {% elif is_state('input_select.alexa', 'Bedroom') %}
+            media_player.bedroom
+          {% elif is_state('input_select.alexa', 'Patio') %}
+            media_player.patio
+          {% elif is_state('input_select.alexa', 'None') %}
+            false
+          {% endif %}
+        volume_level: 0.5
+    - service: media_player.alexa_tts
+      data_template:
+        entity_id: >
+          {% if is_state('input_select.alexa', 'Loungeroom') %}
+            media_player.lounge_room_2
+          {% elif is_state('input_select.alexa', 'Bedroom') %}
+            media_player.bedroom
+          {% elif is_state('input_select.alexa', 'Patio') %}
+            media_player.patio          
+          {% elif is_state('input_select.alexa', 'None') %}
+            false
+          {% endif %}
+        message: "{{  states.input_text.alexa_tts.state }}"
+    - delay: '00:00:02'
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.alexa
+        option: None
+        
+- alias: 'Set Spotify Volume'
+  trigger:
+    platform: state
+    entity_id: input_number.spotify_volume
+  action:
+    service: media_player.volume_set
+    data_template:
+      entity_id: media_player.spotify
+      volume_level: '{{  states.input_number.spotify_volume.state  }}'

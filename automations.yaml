@@ -1,0 +1,96 @@
+- id: Projector_Off
+  alias: Projector Off
+  trigger:
+  - entity_id: switch.projector
+    from: 'on'
+    platform: state
+  action:
+  - data:
+      entity_id: script.projector
+    entity_id: script.projector
+    service: script.turn_on
+- id: Turn_Off_Morning
+  alias: Turn off lamps in the morning
+  trigger:
+  - at: 08:00:00
+    platform: time
+  action:
+  - data:
+      entity_id: group.lounge_room_lamps
+    entity_id: group.lounge_room_lamps
+    service: switch.turn_off
+- id: Turn_On_Light_When_Sun_Sets
+  alias: Turn on light when sun sets
+  trigger:
+  - event: sunset
+    offset: -00:30:00
+    platform: sun
+  action:
+  - data:
+      entity_id: group.lounge_room_lamps
+    entity_id: group.lounge_room_lamps, group.entrance, group.dining_room_lamps
+    service: switch.turn_on
+  - data:
+      entity_id: group.entrance
+    service: switch.turn_on
+  - data:
+      entity_id: group.dining_room_lamps
+    service: switch.turn_on
+- id: Turn_Off_Elliott's_Light
+  alias: Turn off Elliott's Light
+  trigger:
+  - entity_id: light.elliotts_room
+    for:
+      minutes: 5
+    platform: state
+    to: 'on'
+  condition:
+  - after: sunrise
+    before: sunset
+    condition: sun
+  action:
+  - data:
+      entity_id: light.elliotts_room
+    entity_id: light.elliotts_room
+    service: light.turn_off
+- id: Motion_in_Lounge_Room
+  alias: Motion in Lounge Room
+  trigger:
+  - entity_id: sensor.lounge_room_motion_sensor
+    platform: state
+    to: Motion Detected
+  condition:
+  - after: sunset
+    condition: sun
+  - condition: state
+    entity_id: switch.wemo_switch_sl
+    state: 'off'
+  - before: 06:00
+    condition: time
+  action:
+  - alias: ''
+    data:
+      entity_id: script.motion_light
+    service: script.turn_on
+- id: Stoke_The_Fire
+  alias: Stoke the fire
+  trigger:
+  - entity_id: switch.fireplace
+    platform: state
+    to: 'on'
+  action:
+  - data:
+      entity_id: script.stoke_the_fire
+    entity_id: script.stoke_it
+    service: script.turn_on
+- id: '1534912841555'
+  alias: Morning Message
+  trigger:
+  - entity_id: sensor.time
+    platform: state
+    to: 06:00
+  condition: []
+  action:
+  - data:
+      entity_id: script.morning_text
+    service: script.turn_on

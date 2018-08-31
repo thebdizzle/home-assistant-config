@@ -1,0 +1,176 @@
+  - name: scene_switches_off
+    entities:
+      switch.wemo_switch_tl: off
+      switch.wemo_switch_fl: off
+      
+  - name: scene_switches_on
+    entities:
+      switch.wemo_switch_tl: on
+      switch.wemo_switch_fl: on
+      
+  - name: sexy_lighting
+    entities:
+      light.kr:
+        state: on
+        xy_color: [0.66, 0.33]
+        brightness: 200
+      light.kl:
+        state: on
+        xy_color: [0.66, 0.33]
+        brightness: 200
+      light.drp:
+        state: on
+        xy_color: [0.66, 0.33]
+        brightness: 200        
+      light.drt:
+        state: on
+        xy_color: [0.66, 0.33]
+        brightness: 200 
+        
+  - name: Kitchen Lights Red
+    entities:
+      light.kr:
+        state: on
+        color_name: red
+        brightness: 255
+      light.kl:
+        state: on
+        color_name: red
+        brightness: 255
+
+  - name: Dining Room Lights Red
+    entities:
+      light.drp:
+        state: on
+        color_name: red
+        brightness: 255
+      light.drt:
+        state: on
+        color_name: red
+        brightness: 255
+
+  - name: Kitchen Lights Blue
+    entities:
+      light.kr:
+        state: on
+        color_name: blue
+        brightness: 255
+      light.kl:
+        state: on
+        color_name: blue
+        brightness: 255
+
+  - name: Dining Room Lights Blue
+    entities:
+      light.drp:
+        state: on
+        color_name: blue
+        brightness: 255
+      light.drt:
+        state: on
+        color_name: blue
+        brightness: 255
+        
+  - name: Kitchen Lights Orange
+    entities:
+      light.kr:
+        state: on
+        rgb_color: [255, 104, 31]
+        brightness: 255
+      light.kl:
+        state: on
+        rgb_color: [255, 104, 31]
+        brightness: 255
+
+  - name: Dining Room Lights Orange
+    entities:
+      light.drp:
+        state: on
+        rgb_color: [255, 104, 31]
+        brightness: 255
+      light.drt:
+        state: on
+        rgb_color: [255, 104, 31]
+        brightness: 255
+        
+  - name: Kitchen Lights Green
+    entities:
+      light.kr:
+        state: on
+        color_name: green
+        brightness: 255
+      light.kl:
+        state: on
+        color_name: green
+        brightness: 255
+
+  - name: Dining Room Lights Green
+    entities:
+      light.drp:
+        state: on
+        color_name: green
+        brightness: 255
+      light.drt:
+        state: on
+        color_name: green
+        brightness: 255
+        
+  - name: Kitchen Lights Purple
+    entities:
+      light.kr:
+        state: on
+        rgb_color: [102, 0, 153]
+        brightness: 255
+      light.kl:
+        state: on
+        rgb_color: [102, 0, 153]
+        brightness: 255
+
+  - name: Dining Room Lights Purple
+    entities:
+      light.drp:
+        state: on
+        rgb_color: [102, 0, 153]
+        brightness: 255
+      light.drt:
+        state: on
+        rgb_color: [102, 0, 153]
+        brightness: 255
+        
+  - name: Kitchen Lights Warm White
+    entities:
+      light.kr:
+        state: on
+        profile: reading
+        brightness: 255
+      light.kl:
+        state: on
+        profile: reading
+        brightness: 255
+
+  - name: Dining Room Lights Warm White
+    entities:
+      light.drp:
+        state: on
+        profile: reading
+        brightness: 255
+      light.drt:
+        state: on
+        profile: reading
+        brightness: 255 
+
+  - name: Fire Up The Theatre
+    entities:
+      script.fire_up_the_theatre: on
+
+  - name: Shutdown The Theatre
+    entities:
+      script.shutdown_the_theatre: on
+  
+  - name: party_time
+    entities:
+      script.repeat: on  
+      
+  - name: Bedtime
+    entities:
+      script.bedtime: on
